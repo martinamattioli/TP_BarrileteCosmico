@@ -7,7 +7,7 @@ class usuario{
 	var listaUsuarios
 	var dineroEnCuenta
 	var origen
-	var kilometros
+	
 	
 	method historial() = historial
 		
@@ -27,7 +27,7 @@ class usuario{
 
 	method viajar(destino,medio){
 		const distancia = origen.distanciaAOtraLocalidad(destino)
-		kilometros += distancia
+		
 		if (self.puedeViajar(distancia,destino,medio)){
 			historial.add([origen,destino])
 		    dineroEnCuenta -= distancia * medio.costoPorKilometro() + destino.precio()
@@ -41,13 +41,15 @@ class usuario{
 	
 	
 	method kilometros() {
-		return (self.costoTotalDeDestinos())*0.1
+		var kilometrosTotales = 0
+		historial.forEach({viaje => kilometrosTotales += (viaje.get(0)).distanciaAOtraLocalidad(viaje.get(1))})
+		return kilometrosTotales
 	}
-	
+	/*
 	method costoTotalDeDestinos() {
 		return historial.sum({unDestino => unDestino.precio()})
 	}
-	
+	*/
 	method seguirA(unUsuario) {
 		self.agregarSeguido(unUsuario)
 		unUsuario.agregarSeguido(self)
@@ -59,7 +61,7 @@ class usuario{
 	
 }
 
-const pabloHari = new usuario(historial = #{[garlic,toninas],[toninas,goodAirs]}, listaUsuarios = #{}, dineroEnCuenta = 1500,origen = goodAirs, kilometros=1000)
+const pabloHari = new usuario(historial = #{[garlic,toninas],[toninas,goodAirs]}, listaUsuarios = #{}, dineroEnCuenta = 1500,origen = goodAirs)
 
 /*
 object pabloHari {

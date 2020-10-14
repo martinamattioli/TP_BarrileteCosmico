@@ -1,7 +1,9 @@
 import destinos.*
+import mediosDeTransporte.*
 
 object barrileteCosmico {
 	const destinos = #{garlic,silver,toninas,goodAirs}
+	const medios = #{avion}
 	
 	method destinosMasImportantes() {
 		return destinos.filter({unDestino => unDestino.esDestacado()})
@@ -11,6 +13,9 @@ object barrileteCosmico {
 		destinos.forEach({unDestino => unDestino.aplicarDescuento((unDestino.precio())*unDescuento)})
 	}
 	
+	method armarViaje(usuario,destino){
+		usuario.viajar(destino,medios.anyOne())
+	}
 	
 	method esExtrema() {
 		return destinos.any({unDestino => unDestino.esPeligroso()})
