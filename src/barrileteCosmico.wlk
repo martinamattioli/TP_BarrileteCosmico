@@ -1,5 +1,6 @@
 import destinos.*
 import mediosDeTransporte.*
+import viaje.*
 
 object barrileteCosmico {
 	const destinos = #{garlic,silver,toninas,goodAirs}
@@ -14,7 +15,8 @@ object barrileteCosmico {
 	}
 	
 	method armarViaje(usuario,destino){
-		usuario.viajar(destino,medios.anyOne())
+		const nuevoViaje = new Viaje(origen = usuario.origen(), destino = destino, medioDeTransporte = medios.anyOne())
+		return nuevoViaje
 	}
 	
 	method esExtrema() {

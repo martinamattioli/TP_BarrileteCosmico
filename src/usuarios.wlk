@@ -1,5 +1,7 @@
 import destinos.*
 import mediosDeTransporte.*
+import viaje.*
+import barrileteCosmico.*
 
 class usuario{
 	
@@ -8,6 +10,7 @@ class usuario{
 	var dineroEnCuenta
 	var origen
 	
+	method origen() = origen
 	
 	method historial() = historial
 		
@@ -28,21 +31,22 @@ class usuario{
 	method viajar(destino,medio){
 		const distancia = origen.distanciaAOtraLocalidad(destino)
 		
-		if (self.puedeViajar(distancia,destino,medio)){
-			historial.add([origen,destino])
-		    dineroEnCuenta -= distancia * medio.costoPorKilometro() + destino.precio()
+		if (self.puedeViajar(destino,medio,distancia)){
+			var nuevoViaje = barrileteCosmico.armarViaje(self,destino)
+			historial.add(nuevoViaje)
+		    dineroEnCuenta -= nuevoViaje.valor()
 		    origen = destino
 		}
 	}	
 	
-	method puedeViajar(distancia,destino,medio){
+	method puedeViajar(destino,medio,distancia){
 		return distancia * medio.costoPorKilometro() + destino.precio() < dineroEnCuenta
 	}
 	
 	
 	method kilometros() {
 		var kilometrosTotales = 0
-		historial.forEach({viaje => kilometrosTotales += (viaje.get(0)).distanciaAOtraLocalidad(viaje.get(1))})
+		historial.forEach({viaje => kilometrosTotales += viaje.kilometros()})
 		return kilometrosTotales
 	}
 	/*
@@ -61,7 +65,7 @@ class usuario{
 	
 }
 
-const pabloHari = new usuario(historial = #{[garlic,toninas],[toninas,goodAirs]}, listaUsuarios = #{}, dineroEnCuenta = 1500,origen = goodAirs)
+const pabloHari = new usuario(historial = [new Viaje(origen=garlic,destino=toninas,medioDeTransporte=avion),new Viaje(origen=toninas,destino=goodAirs,medioDeTransporte=avion)], listaUsuarios = #{}, dineroEnCuenta = 1500,origen = goodAirs)
 
 /*
 object pabloHari {
