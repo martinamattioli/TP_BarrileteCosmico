@@ -29,18 +29,16 @@ class usuario{
 */
 
 	method viajar(destino,medio){
-		const distancia = origen.distanciaAOtraLocalidad(destino)
-		
-		if (self.puedeViajar(destino,medio,distancia)){
-			var nuevoViaje = barrileteCosmico.armarViaje(self,destino)
+		var nuevoViaje = barrileteCosmico.armarViaje(self,destino)
+		if (self.puedeViajar(nuevoViaje)){
 			historial.add(nuevoViaje)
 		    dineroEnCuenta -= nuevoViaje.valor()
 		    origen = destino
 		}
 	}	
 	
-	method puedeViajar(destino,medio,distancia){
-		return distancia * medio.costoPorKilometro() + destino.precio() < dineroEnCuenta
+	method puedeViajar(viaje){
+		return viaje.valor() < dineroEnCuenta
 	}
 	
 	
