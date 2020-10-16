@@ -1,20 +1,14 @@
-import barrileteCosmico.barrileteCosmico
+import barrileteCosmico.*
 import destinos.*
-import usuarios.pabloHari
 
 
-describe "contexto condiciones iniciales"{
+describe "condiciones iniciales de Barrilete Cosmico"{
 	
 	test "los destinos mas importantes de Barrilete Cosmico es una coleccion con garlic y toninas" {
 
 		assert.equals(#{garlic,toninas},barrileteCosmico.destinosMasImportantes())
 	}
 	
-	test "el destino Silver's Sea no es peligroso" {
-		
-		assert.notThat(silver.esPeligroso())
-		
-	}
 		
 	test "el unico destino peligroso de Barrilete Cosmico es Last Toninas" {
 	
@@ -28,41 +22,10 @@ describe "contexto condiciones iniciales"{
 		
 	}
 	
-	test "la carta de destinos de Barrilete Cosmico es una coleccion con Garlic's Sea, Silver's Sea, Last Toninas y Good Airs" {
-		
-		assert.equals(["Garlic's Sea","Good Airs","Silver's Sea","Last Toninas"],barrileteCosmico.cartaDeDestinos())
-		
-	}
-	
-		
-	test "los kilometros del usuario PHari son 500Km" {
-		
-		assert.equals(500,pabloHari.kilometros())
-		
-	}
-	
 }
 
-describe "contexto se le aplica 25% de descuento a Last Toninas" {
-	
-	fixture {
-		toninas.aplicarDescuento((toninas.precio())*0.25)
-	}
-	
-	test "el precio de Last Toninas luego del 25% de descuento, es de $2625" {
-	
-		assert.equals(2625,toninas.precio())
-	
-	}
-	
-	test "test Last Toninas tiene el certificado de descuento luego del 25% de descuento " {
-		
-		assert.that(toninas.tieneEnElEquipaje("certificado de descuento"))
-		
-	}
-}
 
-describe "contexto Barrilete Cosmico aplica descuentos a todos sus destinos" {
+describe "Barrilete Cosmico aplica descuentos a todos sus destinos" {
 
 	const destinos = #{garlic,silver,toninas,goodAirs}
 	
@@ -93,7 +56,7 @@ describe "contexto Barrilete Cosmico aplica descuentos a todos sus destinos" {
 		assert.equals(1275,goodAirs.precio())
 	
 	}
-	
+
 	test "todos los destinos deben tener el certificado de descuento" {
 		
 		assert.that(destinos.all({unDestino => unDestino.tieneEnElEquipaje("certificado de descuento")}))
@@ -101,22 +64,3 @@ describe "contexto Barrilete Cosmico aplica descuentos a todos sus destinos" {
 
 }
 
-describe "contexto el usuario PHari luego de volar a Silver's Sea" {
-	
-	fixture {
-		pabloHari.volarA(silver)
-	}
-	
-	test "el historial del usuario contiene ese destino" {
-		
-		assert.that((pabloHari.historial()).contains(silver))
-		
-	}
-	
-	test "el usuario posee $150 en su cuenta" {
-
-		assert.equals(150,pabloHari.dineroEnCuenta())
-		
-	}
-	
-}

@@ -1,21 +1,33 @@
+import localidad.*
+import medioDeTransporte.*
+import destinos.*
+import usuarios.*
+
 class Viaje {
-	
+
 	var origen
 	var destino
-	var medioDeTransporte
-
-	method origen() = origen
+	var transporte
 	
 	method destino() = destino
 	
-	method medioDeTransporte() = medioDeTransporte
-	
-	method valor(){
-		const distancia = origen.distanciaAOtraLocalidad(destino)
-		return distancia * medioDeTransporte.costoPorKilometro() + destino.precio()
+	method precioDelViaje(){
+		const kilometrosARecorrer = origen.distanciaAOtraLocalidad(destino)
+		const precioPorKilometros = (transporte.precioPorKilometro())*kilometrosARecorrer
+		return precioPorKilometros + (destino.precio())
 	}
 	
-	method kilometros(){
+	method distanciaEntreLocalidades() {
 		return origen.distanciaAOtraLocalidad(destino)
 	}
+	
+	method transporte() = transporte
+	
+	method origen() = origen
+
 }
+
+const viaje1 = new Viaje(origen=garlic,destino=toninas,transporte=avion)
+const viaje2 = new Viaje(origen=toninas,destino=goodAirs,transporte=avion)
+const viajeAGarlic = new Viaje(origen = pabloHari.localidadDeOrigen(), destino = garlic,transporte = avion)
+const viajeASilver = new Viaje(origen = garlic, destino = silver,transporte = avion)

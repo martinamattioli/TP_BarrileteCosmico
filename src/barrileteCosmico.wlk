@@ -1,5 +1,5 @@
 import destinos.*
-import mediosDeTransporte.*
+import medioDeTransporte.*
 import viaje.*
 
 object barrileteCosmico {
@@ -15,7 +15,7 @@ object barrileteCosmico {
 	}
 	
 	method armarViaje(usuario,destino){
-		const nuevoViaje = new Viaje(origen = usuario.origen(), destino = destino, medioDeTransporte = medios.anyOne())
+		const nuevoViaje = new Viaje(origen = usuario.localidadDeOrigen(), destino = destino, transporte = medios.anyOne())
 		return nuevoViaje
 	}
 	
@@ -29,5 +29,6 @@ object barrileteCosmico {
 	method cartaDeDestinos() {
 		return destinos.map({unDestino => unDestino.nombre()})
 	}
+	
 	
 }
