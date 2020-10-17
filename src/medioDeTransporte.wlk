@@ -4,9 +4,7 @@ class MedioDeTransporte {
 	const nombre
 	
 	method nombre() = nombre
-	method precioPorKilometro(){
-		return precioPorKilometro
-	}
+	method precioPorKilometro() = precioPorKilometro
 }
 
 const avion = new MedioDeTransporte(tardanza = 5, precioPorKilometro = 10,nombre='avion')
