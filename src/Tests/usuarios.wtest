@@ -10,18 +10,16 @@ describe "Condiciones iniciales de Pablo Hari" {
 	}
 	
 	test "su localidad de origen es Last Toninas" {
-		assert.equals(toninas,pabloHari.localidadDeOrigen())
+		assert.equals(goodAirs,pabloHari.localidadDeOrigen())
 	}
 	
-	test "su localidad de origen es peligrosa" {
-		assert.that((pabloHari.localidadDeOrigen()).esPeligroso())
+	test "su localidad de origen no es peligrosa" {
+		assert.notThat((pabloHari.localidadDeOrigen()).esPeligroso())
 	}
 }
 
-describe "Pablo Hari viaja a Garlic's Sea en tren y,posteriormente, a Silver's Sea en ferry "{
+describe "Pablo Hari viaja a Garlic's Sea y,posteriormente, a Silver's Sea, ambos en avion "{
 	
-	const tren = new MedioDeTransporte(tardanza = 40, precioPorKilometro = 5)
-	const ferry = new MedioDeTransporte(tardanza = 25, precioPorKilometro = 15)
 	const viajeAGarlic = new Viaje(origen = pabloHari.localidadDeOrigen(), destino = garlic,transporte = avion)
 	const viajeASilver = new Viaje(origen = garlic, destino = silver,transporte = avion)
 	const dineroEnCuentaInicial = pabloHari.dineroEnCuenta()
@@ -35,17 +33,17 @@ describe "Pablo Hari viaja a Garlic's Sea en tren y,posteriormente, a Silver's S
 		assert.equals(silver,pabloHari.localidadDeOrigen())
 	}
 	
-	test "recorrio 105 kilometros en total" {
-		assert.equals(105,pabloHari.kilometrosRecorridos())
+	test "recorrio 661 kilometros en total" {
+		assert.equals(661,pabloHari.kilometrosRecorridos())
 	}
 	
-	test "su historial contiene el viaje a Garlic's Sea y a Silver's Sea" {
-		assert.that((pabloHari.historial()).contains(viajeAGarlic))
-		assert.that((pabloHari.historial()).contains(viajeASilver))
+	test "El ultimo viaje de su historial es a Garlic's Sea desde goodAirs" {
+		assert.equals(garlic,(pabloHari.historial().last().origen()))
+		assert.equals(silver,(pabloHari.historial().last().destino()))
 	}
 		
-	test "posee $3035 en su cuenta"{
-		assert.equals(3035,pabloHari.dineroEnCuenta())
+	test "posee $300 en su cuenta"{
+		assert.equals(300,pabloHari.dineroEnCuenta())
 	}
 	
 	test "gasto $4465" {
