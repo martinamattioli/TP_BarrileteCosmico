@@ -39,10 +39,9 @@ describe "Pablo Hari viaja a Garlic's Sea en tren y,posteriormente, a Silver's S
 		assert.equals(105,pabloHari.kilometrosRecorridos())
 	}
 	
-	test "su historial contiene el viaje a Garlic's Sea y a Silver's Sea" {
-		assert.that((pabloHari.historial()).contains(viajeAGarlic))
-		assert.that((pabloHari.historial()).contains(viajeASilver))
-	}
+	//test "el ultimo viaje que realizo fue a Silver's Sea" {
+	//	
+	//}
 		
 	test "posee $3035 en su cuenta"{
 		assert.equals(3035,pabloHari.dineroEnCuenta())
